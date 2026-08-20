@@ -1,0 +1,13 @@
+{
+  "name": "stockmind",
+  "category": "ML",
+  "architecture": "declarative DAG pipeline framework",
+  "interface": "config runner (JSON) \u2014 python -m dio demo",
+  "testing": "discrete-event simulation",
+  "demo_cmd": "python -m dio demo",
+  "test_cmd": "python -m pytest tests -q",
+  "entry_points": [
+    "dio/__main__.py",
+    "pipeline.json"
+  ]
+}

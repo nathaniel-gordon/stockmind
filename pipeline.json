@@ -1,0 +1,29 @@
+{
+  "pipeline_name": "supply_chain_optimization_dag",
+  "version": "1.0",
+  "stages": [
+    {
+      "name": "generate_synthetic_demand",
+      "type": "source",
+      "params": { "days": 1095, "n_skus": 12, "seed": 42 }
+    },
+    {
+      "name": "pooled_demand_forecasting",
+      "type": "transform",
+      "depends_on": ["generate_synthetic_demand"],
+      "params": { "horizon_weeks": 26 }
+    },
+    {
+      "name": "newsvendor_eoq_policies",
+      "type": "optimizer",
+      "depends_on": ["pooled_demand_forecasting"],
+      "params": { "service_level": 0.95 }
+    },
+    {
+      "name": "discrete_event_simulation",
+      "type": "evaluation",
+      "depends_on": ["newsvendor_eoq_policies"],
+      "params": { "duration_weeks": 26 }
+    }
+  ]
+}
